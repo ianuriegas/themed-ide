@@ -2,7 +2,8 @@ name: Test Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -23,7 +24,8 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*')
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --yes
+          DEPLOY_URL=$(vercel ls --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*' | tail -n1)
           echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
 
       - name: Show Deployment URL

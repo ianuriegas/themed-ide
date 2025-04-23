@@ -1,0 +1,30 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'release:')
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+        
+      - name: Deploy to Vercel
+        id: deploy
+        run: |
+          vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+          DEPLOY_URL=$(vercel ls --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*' | tail -n1)
+          echo "deploy_url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+          
+      - name: Show Deployment URL
+        run: |
+          echo "Production deployment URL: ${{ steps.deploy.outputs.deploy_url }}" 
