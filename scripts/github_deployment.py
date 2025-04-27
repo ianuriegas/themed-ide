@@ -10,7 +10,7 @@ def update_deployment_status(token, repo_name, deployment_id, state, environment
     
     status = {
         'state': state,
-        'environment': 'preview'
+        'environment': 'Preview'
     }
     
     if environment_url:
