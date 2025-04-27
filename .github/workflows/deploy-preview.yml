@@ -49,7 +49,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: context.ref,
-              environment: 'preview',
+              environment: 'Preview',
               auto_merge: false,
               required_contexts: []
             });
