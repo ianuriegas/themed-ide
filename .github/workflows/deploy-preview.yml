@@ -17,11 +17,18 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
+      - name: Link Vercel Project
+        working-directory: ide
+        run: vercel link --yes --project=themed-ide --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Pull Vercel Environment Information
+        working-directory: ide
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
+        working-directory: ide
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
+        working-directory: ide
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
