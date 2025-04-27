@@ -68,8 +68,11 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
+        id: vercel-deploy
         working-directory: ide
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*\.vercel\.app')
+          echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
 
       - name: Update GitHub Deployment Status (Success)
         if: success()
@@ -79,7 +82,7 @@ jobs:
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "success" \
-            "https://themed-ide.vercel.app"
+            "${{ env.DEPLOY_URL }}"
 
       - name: Update GitHub Deployment Status (Failure)
         if: failure()
