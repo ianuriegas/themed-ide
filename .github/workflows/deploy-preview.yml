@@ -61,7 +61,8 @@ jobs:
             "${{ secrets.GITHUB_TOKEN }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
-            "in_progress"
+            "in_progress" \
+            "Preview"
 
       - name: Build Project Artifacts
         working-directory: ide
@@ -82,6 +83,7 @@ jobs:
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "success" \
+            "Preview" \
             "${{ env.DEPLOY_URL }}"
 
       - name: Update GitHub Deployment Status (Failure)
@@ -91,4 +93,5 @@ jobs:
             "${{ secrets.GITHUB_TOKEN }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
-            "failure"
+            "failure" \
+            "Preview"
