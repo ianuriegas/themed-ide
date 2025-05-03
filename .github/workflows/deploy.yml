@@ -14,8 +14,6 @@ on:
     secrets:
       VERCEL_TOKEN:
         required: true
-      GITHUB_TOKEN:
-        required: true
 
 jobs:
   deploy:
@@ -65,7 +63,7 @@ jobs:
       - name: Update GitHub Deployment Status (In Progress)
         run: |
           python scripts/github_deployment.py \
-            "${{ inputs.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "in_progress" \
@@ -86,7 +84,7 @@ jobs:
         if: success()
         run: |
           python scripts/github_deployment.py \
-            "${{ inputs.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "success" \
@@ -97,7 +95,7 @@ jobs:
         if: failure()
         run: |
           python scripts/github_deployment.py \
-            "${{ inputs.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "failure" \
