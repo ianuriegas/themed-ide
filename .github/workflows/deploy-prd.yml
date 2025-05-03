@@ -12,3 +12,6 @@ jobs:
     with:
       environment: 'Production'
       is_production: true
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

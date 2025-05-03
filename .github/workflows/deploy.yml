@@ -11,6 +11,11 @@ on:
         required: true
         type: boolean
         description: 'Whether this is a production deployment'
+    secrets:
+      VERCEL_TOKEN:
+        required: true
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   deploy:
@@ -36,11 +41,11 @@ jobs:
 
       - name: Link Vercel Project
         working-directory: ide
-        run: vercel link --yes --project=themed-ide --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel link --yes --project=themed-ide --token=${{ inputs.VERCEL_TOKEN }}
 
       - name: Pull Vercel Environment Information
         working-directory: ide
-        run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ inputs.VERCEL_TOKEN }}
 
       - name: Create GitHub Deployment
         id: deployment
@@ -60,7 +65,7 @@ jobs:
       - name: Update GitHub Deployment Status (In Progress)
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ inputs.GITHUB_TOKEN }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "in_progress" \
@@ -68,20 +73,20 @@ jobs:
 
       - name: Build Project Artifacts
         working-directory: ide
-        run: vercel build ${{ inputs.is_production && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build ${{ inputs.is_production && '--prod' || '' }} --token=${{ inputs.VERCEL_TOKEN }}
         
       - name: Deploy Project Artifacts to Vercel
         id: vercel-deploy
         working-directory: ide
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt ${{ inputs.is_production && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*\.vercel\.app')
+          DEPLOY_URL=$(vercel deploy --prebuilt ${{ inputs.is_production && '--prod' || '' }} --token=${{ inputs.VERCEL_TOKEN }} | grep -o 'https://[^ ]*\.vercel\.app')
           echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
 
       - name: Update GitHub Deployment Status (Success)
         if: success()
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ inputs.GITHUB_TOKEN }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "success" \
@@ -92,7 +97,7 @@ jobs:
         if: failure()
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ inputs.GITHUB_TOKEN }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "failure" \
