@@ -40,7 +40,7 @@ jobs:
       - name: Set GitHub deployment environment name (Capitalized first letter)
         id: set-env
         run: |
-          echo "GITHUB_DEPLOYMENT_ENV=${${{ inputs.environment }}^}" >> $GITHUB_ENV
+          echo "GITHUB_DEPLOYMENT_ENV=$(python -c "print('${{ inputs.environment }}'.capitalize())")" >> $GITHUB_ENV
 
       - name: Link Vercel Project
         working-directory: ide
@@ -50,7 +50,7 @@ jobs:
         working-directory: ide
         run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Create GitHub Deployment
+      - name: Create GitHub Deployment (${{ env.GITHUB_DEPLOYMENT_ENV }})
         id: deployment
         uses: actions/github-script@v7
         with:
@@ -78,7 +78,7 @@ jobs:
         working-directory: ide
         run: vercel build ${{ inputs.is_production && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
         
-      - name: Deploy Project Artifacts to Vercel
+      - name: Deploy Project Artifacts to Vercel (${{ inputs.environment }})
         id: vercel-deploy
         working-directory: ide
         run: |
