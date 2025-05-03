@@ -11,13 +11,13 @@ on:
         required: true
         type: boolean
         description: 'Whether this is a production deployment'
+    secrets:
+      VERCEL_TOKEN:
+        required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      deployments: write
-      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,6 +37,11 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
+      - name: Set GitHub deployment environment name (Capitalized first letter)
+        id: set-env
+        run: |
+          echo "GITHUB_DEPLOYMENT_ENV=${${{ inputs.environment }}^}" >> $GITHUB_ENV
+
       - name: Link Vercel Project
         working-directory: ide
         run: vercel link --yes --project=themed-ide --token=${{ secrets.VERCEL_TOKEN }}
@@ -54,7 +59,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: context.ref,
-              environment: '${{ inputs.environment }}',
+              environment: '${{ env.GITHUB_DEPLOYMENT_ENV }}',
               auto_merge: false,
               required_contexts: []
             });
@@ -63,11 +68,11 @@ jobs:
       - name: Update GitHub Deployment Status (In Progress)
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "in_progress" \
-            "${{ inputs.environment }}"
+            "${{ env.GITHUB_DEPLOYMENT_ENV }}"
 
       - name: Build Project Artifacts
         working-directory: ide
@@ -84,19 +89,19 @@ jobs:
         if: success()
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "success" \
-            "${{ inputs.environment }}" \
+            "${{ env.GITHUB_DEPLOYMENT_ENV }}" \
             "${{ env.DEPLOY_URL }}"
 
       - name: Update GitHub Deployment Status (Failure)
         if: failure()
         run: |
           python scripts/github_deployment.py \
-            "${{ secrets.GITHUB_TOKEN }}" \
+            "${{ github.token }}" \
             "${{ github.repository }}" \
             "${{ steps.deployment.outputs.result }}" \
             "failure" \
-            "${{ inputs.environment }}" 
+            "${{ env.GITHUB_DEPLOYMENT_ENV }}" 

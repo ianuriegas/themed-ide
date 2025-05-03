@@ -8,7 +8,12 @@ on:
 
 jobs:
   deploy-preview:
+    permissions:
+      deployments: write
+      contents: read
     uses: ./.github/workflows/deploy.yml
     with:
-      environment: 'Preview'
+      environment: 'preview'
       is_production: false
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
