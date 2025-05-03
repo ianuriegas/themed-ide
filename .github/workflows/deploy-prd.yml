@@ -5,6 +5,9 @@ on:
 
 jobs:
   deploy-prd:
+    permissions:
+      deployments: write
+      contents: read
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'Production'

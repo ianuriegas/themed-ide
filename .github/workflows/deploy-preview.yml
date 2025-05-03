@@ -8,6 +8,9 @@ on:
 
 jobs:
   deploy-preview:
+    permissions:
+      deployments: write
+      contents: read
     uses: ./.github/workflows/deploy.yml
     with:
       environment: 'Preview'
