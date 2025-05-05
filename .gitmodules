@@ -1,3 +1,6 @@
 [submodule "ide"]
 	path = ide
 	url = https://github.com/judge0/ide.git
+[submodule "iTerm2-Color-Schemes"]
+	path = iTerm2-Color-Schemes
+	url = https://github.com/mbadolato/iTerm2-Color-Schemes.git
