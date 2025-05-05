@@ -49,4 +49,6 @@ Then access the IDE at `http://localhost:8000`.
 
 ## License
 
-Based on [Judge0 IDE](https://github.com/judge0/ide) (MIT License)
+This project is built upon and includes:
+- [Judge0 IDE](https://github.com/judge0/ide) (MIT License)
+- [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes) (MIT License)
