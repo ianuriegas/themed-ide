@@ -12,7 +12,7 @@ on:
         type: boolean
         description: 'Whether this is a production deployment'
     secrets:
-      VERCEL_TOKEN:
+      OP_SERVICE_ACCOUNT_TOKEN:
         required: true
 
 jobs:
@@ -37,6 +37,14 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          VERCEL_TOKEN: op://Github Vault/Vercel Token/credential
+
       - name: Set GitHub deployment environment name (Capitalized first letter)
         id: set-env
         run: |
@@ -44,11 +52,11 @@ jobs:
 
       - name: Link Vercel Project
         working-directory: ide
-        run: vercel link --yes --project=themed-ide --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel link --yes --project=themed-ide --token=${{ env.VERCEL_TOKEN }}
 
       - name: Pull Vercel Environment Information
         working-directory: ide
-        run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ env.VERCEL_TOKEN }}
 
       - name: Create GitHub Deployment (${{ env.GITHUB_DEPLOYMENT_ENV }})
         id: deployment
@@ -76,13 +84,13 @@ jobs:
 
       - name: Build Project Artifacts
         working-directory: ide
-        run: vercel build ${{ inputs.is_production && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build ${{ inputs.is_production && '--prod' || '' }} --token=${{ env.VERCEL_TOKEN }}
         
       - name: Deploy Project Artifacts to Vercel (${{ inputs.environment }})
         id: vercel-deploy
         working-directory: ide
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt ${{ inputs.is_production && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }} | grep -o 'https://[^ ]*\.vercel\.app')
+          DEPLOY_URL=$(vercel deploy --prebuilt ${{ inputs.is_production && '--prod' || '' }} --token=${{ env.VERCEL_TOKEN }} | grep -o 'https://[^ ]*\.vercel\.app')
           echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
 
       - name: Update GitHub Deployment Status (Success)

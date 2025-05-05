@@ -13,4 +13,4 @@ jobs:
       environment: 'production'
       is_production: true
     secrets:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
