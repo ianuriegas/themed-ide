@@ -1,0 +1,354 @@
+{
+  "base": "vs",
+  "inherit": true,
+  "rules": [
+    {
+      "foreground": "f8282a",
+      "token": "keyword"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "storage"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "storage.type"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.control"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.operator"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.type"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.interface"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.class"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.enum"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.import"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.package"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.namespace"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.using"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.single"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.double"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.triple"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.template"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.regexp"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.raw"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.docstring"
+    },
+    {
+      "foreground": "fa701d",
+      "token": "comment"
+    },
+    {
+      "foreground": "fa701d",
+      "token": "comment.line"
+    },
+    {
+      "foreground": "fa701d",
+      "token": "comment.block"
+    },
+    {
+      "foreground": "fa701d",
+      "token": "comment.documentation"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.parameter"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other.property"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other.object"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other.constant"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.name.function"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.name.method"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.name.class"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.name.type"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.name.tag"
+    },
+    {
+      "foreground": "9f00bd",
+      "token": "entity.other.attribute-name"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.numeric"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.language"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.character"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.other"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.numeric.integer"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.numeric.float"
+    },
+    {
+      "foreground": "33c3c1",
+      "token": "constant.numeric.hex"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text.plain"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text.xml"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text.html"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text.css"
+    },
+    {
+      "foreground": "b3b3b3",
+      "token": "text.javascript"
+    },
+    {
+      "foreground": "fb0416",
+      "token": "invalid"
+    },
+    {
+      "foreground": "fb0416",
+      "token": "invalid.illegal"
+    },
+    {
+      "foreground": "fb0416",
+      "token": "invalid.deprecated"
+    },
+    {
+      "foreground": "2cc631",
+      "token": "string.regexp"
+    },
+    {
+      "foreground": "2cc631",
+      "token": "string.quoted.regexp"
+    },
+    {
+      "foreground": "2cc631",
+      "token": "string.quoted.regexp.heredoc"
+    },
+    {
+      "foreground": "fdd727",
+      "token": "markup.heading"
+    },
+    {
+      "foreground": "fdd727",
+      "token": "markup.underline"
+    },
+    {
+      "foreground": "fdd727",
+      "token": "markup.underline.link"
+    },
+    {
+      "foreground": "fdd727",
+      "token": "markup.bold"
+    },
+    {
+      "foreground": "fdd727",
+      "token": "markup.italic"
+    },
+    {
+      "foreground": "1670ff",
+      "token": "support"
+    },
+    {
+      "foreground": "1670ff",
+      "token": "support.function"
+    },
+    {
+      "foreground": "1670ff",
+      "token": "support.class"
+    },
+    {
+      "foreground": "1670ff",
+      "token": "support.type"
+    },
+    {
+      "foreground": "1670ff",
+      "token": "support.constant"
+    },
+    {
+      "foreground": "e900b0",
+      "token": "entity.name.namespace"
+    },
+    {
+      "foreground": "e900b0",
+      "token": "entity.name.scope-resolution"
+    },
+    {
+      "foreground": "e900b0",
+      "token": "entity.name.label"
+    },
+    {
+      "foreground": "3ad5ce",
+      "token": "constant.character.escape"
+    },
+    {
+      "foreground": "3ad5ce",
+      "token": "constant.character.entity"
+    },
+    {
+      "foreground": "3ad5ce",
+      "token": "constant.character.unicode"
+    },
+    {
+      "foreground": "eeeeec",
+      "token": "meta"
+    },
+    {
+      "foreground": "eeeeec",
+      "token": "meta.preprocessor"
+    },
+    {
+      "foreground": "eeeeec",
+      "token": "meta.selector"
+    },
+    {
+      "foreground": "eeeeec",
+      "token": "meta.tag"
+    },
+    {
+      "foreground": "eeeeec",
+      "token": "meta.type.annotation"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.operator.logical"
+    },
+    {
+      "foreground": "f8282a",
+      "token": "keyword.operator.arithmetic"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.template"
+    },
+    {
+      "foreground": "328a5d",
+      "token": "string.quoted.template"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other.readwrite.global"
+    },
+    {
+      "foreground": "135cd0",
+      "token": "variable.other.readwrite.local"
+    }
+  ],
+  "colors": {
+    "editor.foreground": "#262626",
+    "editor.background": "#ffffff",
+    "editor.selectionBackground": "#6fd3fc",
+    "editorCursor.foreground": "#6fd3fc",
+    "editor.lineHighlightBackground": "#00000012",
+    "editorWhitespace.foreground": "#BFBFBF"
+  }
+}
